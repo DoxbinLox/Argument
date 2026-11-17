@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080a0d">
+<title>ОТКРЫТОЕ ДОСЬЕ — OSINT / Research</title>
+<style>
+:root{--bg:#080a0d;--panel:#0d1117;--panel2:#101720;--line:#202a35;--muted:#7f8b98;--text:#e7edf3;--green:#9bffbd;--red:#ff6565}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 78% 0%,#10201d 0,transparent 32%),var(--bg);color:var(--text);font:15px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 40px));margin:auto}.top{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;background:#080a0dcc;backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.14em;font-size:13px}.mark{width:34px;height:34px;border:1px solid #496c5b;display:grid;place-items:center;color:var(--green);font-size:17px;background:#102018}
+.nav{display:flex;gap:28px;color:#9ba7b3;font-size:13px}.nav a:hover,.author:hover{color:var(--green)}.status{font:11px ui-monospace,monospace;color:var(--green);letter-spacing:.08em}.status:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:9px;box-shadow:0 0 12px var(--green)}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center;padding:82px 0 74px;min-height:570px}.eyebrow{font:11px ui-monospace,monospace;letter-spacing:.2em;color:var(--green);text-transform:uppercase}.hero h1{font-size:clamp(42px,6vw,72px);line-height:.99;letter-spacing:-.055em;margin:20px 0 22px;font-weight:800}.hero h1 span{color:var(--green)}.lead{color:#a2adb8;max-width:510px;font-size:16px}.actions{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}.btn{padding:13px 18px;border:1px solid #35443f;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;transition:.2s}.btn.primary{background:var(--green);color:#07110b;border-color:var(--green)}.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}.hero-art{position:relative;min-height:360px;border:1px solid #26352f;background:linear-gradient(145deg,#111a1a,#0a0d12 65%);overflow:hidden;display:grid;place-items:center}.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid #385247;border-radius:50%;width:290px;height:290px;opacity:.42}.hero-art:after{width:220px;height:220px}.scan{position:absolute;inset:0;background:linear-gradient(transparent 49.8%,#9bffbd18 50%,transparent 50.3%);background-size:100% 8px;opacity:.5}.cross{position:absolute;width:100%;height:1px;background:#355346;top:50%;opacity:.5}.cross.v{width:1px;height:100%;left:50%;top:0}.silhouette{width:142px;height:210px;position:relative;z-index:1;filter:drop-shadow(0 0 24px #9bffbd22)}.head{width:76px;height:88px;border:1px solid #91b8a0;background:linear-gradient(145deg,#253b32,#101a18);border-radius:48% 48% 42% 42%;margin:auto;position:relative}.head:before{content:"";position:absolute;left:13px;right:13px;top:39px;height:2px;background:var(--green);box-shadow:0 0 12px var(--green)}.bodyshape{width:142px;height:112px;margin-top:8px;border:1px solid #587663;border-radius:55% 55% 4px 4px;background:linear-gradient(110deg,#1a2a24,#0c1112)}.art-label{position:absolute;font:10px ui-monospace,monospace;color:#789487;letter-spacing:.12em}.art-label.tl{top:18px;left:18px}.art-label.br{bottom:18px;right:18px;text-align:right}.art-tag{position:absolute;bottom:62px;left:22px;font:10px ui-monospace,monospace;color:var(--green)}
+.section{padding:54px 0;border-top:1px solid var(--line)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:25px}.section h2{font-size:26px;letter-spacing:-.03em;margin:8px 0 0}.sub{color:var(--muted);font-size:13px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid var(--line);background:linear-gradient(145deg,#10161d,#0b0f14);padding:21px;min-height:190px;transition:.2s}.card:hover{border-color:#526c5d;transform:translateY(-3px)}.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.num{font:11px ui-monospace,monospace;color:#728477}.tag{font:10px ui-monospace,monospace;border:1px solid #34463c;padding:4px 7px;color:var(--green)}.card h3{font-size:18px;margin:0 0 8px}.card p{color:#8e9aa6;font-size:13px;margin:0}.searchbox{display:flex;gap:10px;margin-top:22px}.searchbox input{flex:1;min-width:0;background:#090d12;border:1px solid #28343f;padding:14px 16px;color:var(--text);outline:none;font:13px ui-monospace,monospace}.searchbox input:focus{border-color:#71937e}.searchbox button{background:#18271f;color:var(--green);border:1px solid #405b49;padding:0 20px;font-weight:700;letter-spacing:.08em;cursor:pointer}.result{display:none;margin-top:14px;padding:14px 16px;border:1px solid #354b3d;background:#0c1510;color:#b8d9c3;font:12px ui-monospace,monospace}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.principle{padding:18px;border-left:2px solid #567763;background:#0d1217}.principle b{display:block;font-size:13px;margin-bottom:7px}.principle p{margin:0;color:#8e9aa6;font-size:12px}.notice{border:1px solid #473c2c;background:#15120d;padding:16px 18px;color:#b5a88e;font-size:12px;margin-top:22px}.footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#788592;font-size:12px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.author{color:var(--green);font-family:ui-monospace,monospace}
+
+.cards .card{display:flex;flex-direction:column;cursor:pointer}.card .open-link{margin-top:auto;padding-top:18px;color:var(--green);font:11px ui-monospace,monospace;letter-spacing:.08em}
+.editor-bar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:30px;padding:20px;border:1px solid var(--line);background:#0c1116}
+.editor-bar strong{display:block;margin-top:7px}.editor-bar p{margin:4px 0 0}
+.overlay{position:fixed;inset:0;z-index:20;background:#020406dd;backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px;overflow:auto}
+.dialog{width:min(760px,100%);max-height:92vh;overflow:auto;background:#0c1218;border:1px solid #34443c;box-shadow:0 25px 100px #000;padding:26px;position:relative}
+.dialog h2{margin:8px 0 18px;font-size:26px}.dialog .close{position:absolute;right:18px;top:15px;background:none;border:0;color:#aeb9c3;font-size:25px;cursor:pointer}
+.field{display:grid;gap:6px;margin:13px 0}.field label{font:11px ui-monospace,monospace;color:#9ba9a2;letter-spacing:.08em}.field input,.field textarea{width:100%;background:#080d12;border:1px solid #2a3741;padding:12px;color:var(--text);font:13px/1.5 ui-monospace,monospace;outline:none}.field textarea{min-height:100px;resize:vertical}.field input:focus,.field textarea:focus{border-color:#71937e}
+.dialog-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.danger{border-color:#633c3c;color:#ff9c9c}.dossier-meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.dossier-meta span{font:10px ui-monospace,monospace;color:var(--green);border:1px solid #34463c;padding:5px 8px}.dossier-body{color:#b0bbc5;white-space:pre-wrap;line-height:1.75}.source-list{margin-top:20px;padding-top:15px;border-top:1px solid var(--line)}.source-list a{display:block;color:var(--green);font-size:12px;overflow-wrap:anywhere;margin:7px 0}.empty{border:1px dashed #33413a;padding:28px;text-align:center;color:var(--muted);grid-column:1/-1}
+@media(max-width:760px){.editor-bar{align-items:flex-start;flex-direction:column}.dialog{padding:20px}}
+
+@media(max-width:760px){.nav{display:none}.hero{grid-template-columns:1fr;padding:55px 0 45px;gap:30px}.hero-art{min-height:300px}.cards,.principles{grid-template-columns:1fr}.section-head{display:block}.searchbox{flex-direction:column}.searchbox button{padding:14px}.footer{display:block}.footer div+div{margin-top:10px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;width:100%"><a class="brand" href="#"><span class="mark">⌘</span><span>OPEN<span style="color:var(--green)">DOSSIER</span></span></a><nav class="nav"><a href="#archive">Архив</a><a href="#principles">Принципы</a><a href="#about">О проекте</a></nav><div class="status">SYSTEM ONLINE</div></div></header>
+<main class="wrap">
+<section class="hero">
+<div><div class="eyebrow">OSINT / PUBLIC RECORDS / RESEARCH</div><h1>ЛИЦА.<br>ФАКТЫ.<br><span>КОНТЕКСТ.</span></h1><p class="lead">Открытое досье — исследовательский проект о работе с общедоступной информацией. Факты, источники и связи — без домыслов и вторжения в частную жизнь.</p><div class="actions"><a class="btn primary" href="#archive">Открыть архив ↗</a><a class="btn" href="#principles">Методология</a></div></div>
+<div class="hero-art" role="img" aria-label="Абстрактная цифровая иллюстрация профиля человека в стиле кибер-аналитики"><div class="scan"></div><div class="cross"></div><div class="cross v"></div><div class="art-label tl">SUBJECT / PROFILE_001</div><div class="silhouette"><div class="head"></div><div class="bodyshape"></div></div><div class="art-tag">IDENTITY // REDACTED</div><div class="art-label br">OPEN SOURCE<br>VERIFIED DATA ONLY</div></div>
+</section>
+<section class="section" id="archive"><div class="section-head"><div><div class="eyebrow">01 — DATABASE</div><h2>Публичный архив</h2></div><div class="sub">Демонстрационные карточки · вымышленные данные</div></div>
+
+<div class="cards" id="dossierGrid"></div>
+<div class="searchbox"><input id="query" type="text" placeholder="ПОИСК ПО АРХИВУ..." aria-label="Поиск по архиву"><button type="button" onclick="renderDossiers()">ИСКАТЬ ↗</button></div>
+<div class="sub" id="resultCount" style="margin-top:10px"></div>
+
+<div class="editor-bar">
+  <div><div class="eyebrow">LOCAL CONTROL PANEL</div><strong>Управление архивом</strong><p class="sub">Добавление и редактирование записей сохраняется в этом браузере.</p></div>
+  <button class="btn primary" type="button" onclick="openEditor()">＋ ДОБАВИТЬ ДОСЬЕ</button>
+</div>
+<div class="notice">Редактор работает локально через память браузера (localStorage). Чтобы изменения увидели посетители сайта, после редактирования нужно обновить файл/данные на хостинге. Добавляй только законно опубликованные, проверяемые и несенситивные сведения; не размещай домашние адреса, телефоны, документы, пароли или закрытые переписки.</div>
+</section>
+<section class="section" id="principles"><div class="section-head"><div><div class="eyebrow">02 — RULES OF RESEARCH</div><h2>Принципы работы</h2></div></div><div class="principles">
+<div class="principle"><b>01 / Только открытые источники</b><p>Используются общедоступные публикации, официальные страницы и материалы, законно размещённые в сети.</p></div>
+<div class="principle"><b>02 / Проверка фактов</b><p>Каждое существенное утверждение должно иметь источник. Предположения не выдаются за факты.</p></div>
+<div class="principle"><b>03 / Уважение к приватности</b><p>Не публикуются адреса проживания, телефоны, документы, пароли, закрытые переписки и другие чувствительные данные.</p></div>
+</div><div class="notice">Важно: проект не предназначен для доксинга, преследования, шантажа или раскрытия частной информации. Профили реальных людей допустимы только в законных и общественно значимых рамках — с точными ссылками на публичные источники.</div></section>
+<section class="section" id="about"><div class="eyebrow">03 — ABOUT</div><h2>Информация — это инструмент.<br>Контекст определяет вывод.</h2><p class="lead">OPEN DOSSIER — концепция независимого архива открытых данных. Здесь важны точность, происхождение информации и прозрачная методология исследования.</p></section>
+</main>
+<footer class="wrap footer"><div>© 2026 OPEN DOSSIER · INDEPENDENT RESEARCH CONCEPT</div><div>AUTHOR / <a class="author" href="https://t.me/AyuGramNinja" target="_blank" rel="noopener">@AyuGramNinja</a></div></footer>
+<script>
+const STORAGE_KEY = 'openDossier.records.v1';
+const initialDossiers = [
+ {id:'001',name:'Александр Ветров',category:'DEMO PROFILE',updated:'18.11.2026',summary:'Демонстрационный профиль: краткое описание публичной деятельности.',bio:'Это вымышленный персонаж, созданный для демонстрации структуры досье.\n\nЗдесь можно разместить биографическую справку, публичные проекты и проверяемые факты.',facts:'• Вымышленный персонаж\n• Пример структурирования открытых сведений\n• Данные не относятся к реальному человеку',sources:['https://example.com/'],status:'ДЕМО'},
+ {id:'002',name:'Мария Север',category:'DEMO PROFILE',updated:'18.11.2026',summary:'Демонстрационный профиль: профессиональная деятельность и публикации.',bio:'Это вымышленный персонаж. В реальной записи указывай только релевантную публичную информацию.',facts:'• Вымышленный персонаж\n• Пример карточки открытого профиля',sources:['https://example.com/'],status:'ДЕМО'},
+ {id:'003',name:'Никита Орлов',category:'DEMO PROFILE',updated:'18.11.2026',summary:'Демонстрационный профиль: публичные достижения и проекты.',bio:'Это вымышленный персонаж для тестирования интерфейса.',facts:'• Вымышленный персонаж\n• Пример публичной справки',sources:['https://example.com/'],status:'ДЕМО'}
+];
+function loadDossiers(){try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):initialDossiers.slice()}catch(e){return initialDossiers.slice()}}
+let dossiers=loadDossiers();
+function saveDossiers(){localStorage.setItem(STORAGE_KEY,JSON.stringify(dossiers))}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderDossiers(){
+ const q=(document.getElementById('query')?.value||'').trim().toLowerCase();
+ const filtered=dossiers.filter(d=>[d.name,d.category,d.summary,d.bio].join(' ').toLowerCase().includes(q));
+ const grid=document.getElementById('dossierGrid');
+ grid.innerHTML=filtered.length?filtered.map(d=>`<article class="card" onclick="openDossier('${esc(d.id)}')"><div class="card-top"><span class="num">FILE / ${esc(d.id)}</span><span class="tag">${esc(d.category||'PROFILE')}</span></div><h3>${esc(d.name)}</h3><p>${esc(d.summary||'Описание не добавлено.')}</p><div class="open-link">ОТКРЫТЬ ДОСЬЕ ↗</div></article>`).join(''):'<div class="empty">ПО ЗАПРОСУ НИЧЕГО НЕ НАЙДЕНО</div>';
+ document.getElementById('resultCount').textContent=`ЗАПИСЕЙ: ${filtered.length} / ${dossiers.length}`;
+}
+function ensureOverlay(){if(document.getElementById('overlay'))return;document.body.insertAdjacentHTML('beforeend','<div class="overlay" id="overlay" onclick="if(event.target===this)closeDialog()"><div class="dialog" id="dialog"><button class="close" onclick="closeDialog()" aria-label="Закрыть">×</button><div id="dialogContent"></div></div></div>')}
+function showDialog(content){ensureOverlay();document.getElementById('dialogContent').innerHTML=content;document.getElementById('overlay').style.display='flex';document.body.style.overflow='hidden'}
+function closeDialog(){const o=document.getElementById('overlay');if(o)o.style.display='none';document.body.style.overflow=''}
+function openDossier(id){
+ const d=dossiers.find(x=>x.id===id);if(!d)return;
+ const sources=(d.sources||[]).filter(Boolean).map(s=>{let safe=s;try{const u=new URL(s);if(!['http:','https:'].includes(u.protocol))return '';safe=u.href}catch(e){return ''}return `<a href="${esc(safe)}" target="_blank" rel="noopener noreferrer">${esc(safe)} ↗</a>`}).join('')||'<span class="sub">Источники не добавлены.</span>';
+ showDialog(`<div class="eyebrow">OPEN DOSSIER / FILE ${esc(d.id)}</div><h2>${esc(d.name)}</h2><div class="dossier-meta"><span>${esc(d.category||'PROFILE')}</span><span>${esc(d.status||'PUBLIC')}</span><span>ОБНОВЛЕНО: ${esc(d.updated||'—')}</span></div><p class="lead">${esc(d.summary||'')}</p><div class="dossier-body">${esc(d.bio||'Описание отсутствует.')}\n\n${esc(d.facts||'')}</div><div class="source-list"><b>ИСТОЧНИКИ</b>${sources}</div><div class="dialog-actions"><button class="btn primary" onclick="openEditor('${esc(d.id)}')">РЕДАКТИРОВАТЬ</button><button class="btn" onclick="closeDialog()">ЗАКРЫТЬ</button></div>`);
+}
+function openEditor(id=''){
+ const d=dossiers.find(x=>x.id===id)||{id:'',name:'',category:'PUBLIC PROFILE',summary:'',bio:'',facts:'',sources:[],status:'ПРОВЕРЕНО'};
+ showDialog(`<div class="eyebrow">LOCAL ADMIN / RECORD EDITOR</div><h2>${id?'Редактирование досье':'Новое досье'}</h2>
+ <div class="field"><label>ИМЯ / НАЗВАНИЕ</label><input id="fName" maxlength="100" value="${esc(d.name)}" placeholder="Например: Имя Фамилия"></div>
+ <div class="field"><label>КАТЕГОРИЯ</label><input id="fCategory" maxlength="40" value="${esc(d.category)}" placeholder="PUBLIC PROFILE / PROJECT / ORGANIZATION"></div>
+ <div class="field"><label>КОРОТКОЕ ОПИСАНИЕ</label><textarea id="fSummary" maxlength="500">${esc(d.summary)}</textarea></div>
+ <div class="field"><label>ОСНОВНОЙ ТЕКСТ / БИОГРАФИЯ</label><textarea id="fBio" maxlength="6000">${esc(d.bio)}</textarea></div>
+ <div class="field"><label>ФАКТЫ / ЗАМЕТКИ</label><textarea id="fFacts" maxlength="3000">${esc(d.facts)}</textarea></div>
+ <div class="field"><label>ССЫЛКИ НА ОТКРЫТЫЕ ИСТОЧНИКИ (КАЖДАЯ С НОВОЙ СТРОКИ)</label><textarea id="fSources" maxlength="3000">${esc((d.sources||[]).join('\n'))}</textarea></div>
+ <div class="field"><label>МЕТКА СТАТУСА</label><input id="fStatus" maxlength="30" value="${esc(d.status||'ПРОВЕРЕНО')}"></div>
+ <p class="sub">Не добавляй приватные данные. Для каждого существенного факта указывай открытый источник и дату проверки.</p>
+ <div class="dialog-actions"><button class="btn primary" onclick="saveDossier('${esc(id)}')">СОХРАНИТЬ</button>${id?`<button class="btn danger" onclick="deleteDossier('${esc(id)}')">УДАЛИТЬ</button>`:''}<button class="btn" onclick="closeDialog()">ОТМЕНА</button></div>`);
+}
+function saveDossier(id){
+ const name=document.getElementById('fName').value.trim();if(!name){alert('Укажи имя или название записи.');return}
+ const old=dossiers.find(x=>x.id===id);
+ const nextId=old?old.id:String(Date.now()).slice(-6);
+ const record={id:nextId,name,category:document.getElementById('fCategory').value.trim()||'PUBLIC PROFILE',summary:document.getElementById('fSummary').value.trim(),bio:document.getElementById('fBio').value.trim(),facts:document.getElementById('fFacts').value.trim(),sources:document.getElementById('fSources').value.split('\n').map(s=>s.trim()).filter(Boolean),status:document.getElementById('fStatus').value.trim()||'ПРОВЕРЕНО',updated:new Date().toLocaleDateString('ru-RU')};
+ if(old)dossiers=dossiers.map(x=>x.id===id?record:x);else dossiers.unshift(record);
+ saveDossiers();renderDossiers();closeDialog();
+}
+function deleteDossier(id){if(!confirm('Удалить это досье из локального архива?'))return;dossiers=dossiers.filter(x=>x.id!==id);saveDossiers();renderDossiers();closeDialog()}
+document.getElementById('query').addEventListener('input',renderDossiers);
+document.getElementById('query').addEventListener('keydown',e=>{if(e.key==='Enter')renderDossiers()});
+renderDossiers();
+</script>
+</body></html>
